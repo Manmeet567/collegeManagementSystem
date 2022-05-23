@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Manage Students</title>
+    <link rel="stylesheet" href="/ManageStudents.css">
+</head>
+<body>
+    <div class="dashboard">
+        <%- include('../partials/adminDashboard.ejs') %>
+    </div>
+    <main>
+        <div class="links">
+            <a href="/admin/ManageStudents/allStudents">All Students</a>
+            <a href="/admin/ManageStudents/manageByCourse">Manage By Course</a>
+            <a href="/admin/ManageStudents/manageByBranch">Manage By Branch</a>
+        </div>
+        <div class="data">
+            <% if(studentData.length != 0) { %>
+                <% studentData.forEach(student => { %>
+                    <p><%= student.first_name %> <%= student.last_name %></p>
+                <% }) %>
+            <% } %>
+            
+        </div>
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
