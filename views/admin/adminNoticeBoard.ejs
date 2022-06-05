@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Notice Board</title>
+    <link rel="stylesheet" href="/adminNavbar.css">
+    <link rel="stylesheet" href="/AdminDashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <%- include('../partials/adminDashboard.ejs') %>
+    </div>
+    <main>
+        <%- include('../partials/adminNavbar.ejs') %>
+
+        <div class="nb-content">
+            <form action="/admin/createNotice" method="post">
+                <p>Create a Notice</p>
+                <div class="nh-border"></div>
+                <div class="inf">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" placeholder="Enter Title" required>
+                </div>
+                <div class="inf">
+                    <label for="body">Notice</label>
+                    <textarea name="body" id="body" placeholder="Enter Notice" required></textarea>
+                </div>
+                <div class="inf">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author" placeholder="Author Name" required>
+                </div>
+                <input class="sub-btn" type="submit" value="Create">
+            </form>
+        </div>
+    </main>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
