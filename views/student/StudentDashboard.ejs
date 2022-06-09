@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="/StudentDashboard.css">
+    <link rel="stylesheet" href="/NoticeBoard.css">
+
+    <link rel="stylesheet" href="/adminNavbar.css">
+</head>
+<body>
+    <div class="dashboard">
+        <%- include('../partials/studentDashboard.ejs') %>
+    </div>
+    <main>
+        <%- include('../partials/studentNavbar.ejs') %>
+
+        <!-- <% studentData.forEach(student => { %>
+            <p><%= student.roll_no %></p> 
+            <p><%= student.branch %></p>
+        <% }) %> -->
+        <div class="s-content">
+            <div class="st-card">
+                <div class="header">
+                    <% if(gender == 'female'){ %>
+                        <img src="/icons/f-student.png" alt="Image not found">
+                    <% }else{ %>
+                        <img src="/icons/boy.png" alt="Image not found">
+                    <% } %>
+                    <p><%= studentName %></p>
+                </div>
+                <div class="ex-content">
+                    <div class="f-name">
+                        <div class="info"><span>Name:</span><span><%= studentName %></span></div>
+                        <div class="info"><span>Gender:</span><span><%= currentStudent.gender %></span></div>
+                        <div class="info"><span>Father Name:</span><span><%= currentStudent.father_name %></span></div>
+                        <div class="info"><span>Mother Name:</span><span><%= currentStudent.mother_name %></span></div>
+
+                        <div class="info"><span>Date of Birth:</span><span><%= currentStudent.dob %></span></div>
+
+                        <div class="info"><span>E-mail:</span><span><%= currentStudent.email %></span></div>
+    
+                        <div class="info"><span>Admission Date:</span><span><%= currentStudent.ad_date %></span></div>
+
+                        <div class="info"><span>Course:</span><span><%= currentStudent.course %></span></div>
+
+                        <div class="info"><span>Branch:</span><span><%= currentStudent.branch %></span></div>
+
+                        <div class="info"><span>Semester:</span><span><%= currentStudent.sem %></span></div>
+
+                        <div class="info"><span>Roll No:</span><span><%= currentStudent.roll_no %></span></div>
+
+                        <div class="info"><span>Address:</span><span><%= currentStudent.address %></span></div>
+
+                        <div class="info"><span>Mobile No.:</span><span><%= currentStudent.m_no %></span></div>
+
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="st-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Roll No.</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Course</th>
+                            <th>Branch</th>
+                            <th>Sem</th>
+                            <th>Date of Birth</th>
+                            <th>Mobile No.</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% studentData.forEach((student,index) => { %>
+                            <tr>
+                                <% if(index%2 == 0){ %>
+                                    <td class="rollno" style="background:#f1f1f1;"><%= student.roll_no %></td>
+                                <% }else{ %>
+                                    <td class="rollno" style="background:#ddd;"><%= student.roll_no %></td>
+                                <% } %>
+
+                                <td><%= student.first_name %> <%= student.last_name %></td>
+                                <td><%= student.gender %></td>
+                                <td><%= student.course %></td>
+                                <td><%= student.branch %></td>
+                                <td><%= student.sem %></td>
+                                
+                                <td><%= student.dob %></td>
+                                <td><%= student.m_no %></td>
+                                <td><%= student.email %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="notice-board">
+            <div class="n-nav">
+                <p class="nb">Notice Board</p>
+                
+            </div>
+            <div class="notice" style="min-height: 700px; max-height: 700px;">
+                <% if(notices.length != 0) { %>
+                    <% notices.forEach((notice,index) => { %>
+                        <!--  d.getHours() + ":" + d.getMinutes() + ", " + d.toDateString(); -->
+                        <div class="n-content">
+                            <% if(index % 2 == 0){ %>
+                                <p class="n-date" style="background-color: #f939a1;"><%= notice.updatedAt.toDateString() %></p>
+                            <% } else{ %>
+                                <p class="n-date" style="background-color: #1884ff;"><%= notice.updatedAt.toDateString() %></p>
+                            <% } %>
+                            <h3 class="n-title"><%= notice.title %></h3>
+                            <p class="n-body"><%= notice.body %></p>
+                            <div class="del-notice">
+                                <p class="n-author"><%= notice.author %></p>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else{ %>
+                    <p class="no-notice">No notice to Display.</p>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

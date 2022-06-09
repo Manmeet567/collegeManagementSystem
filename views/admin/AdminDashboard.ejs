@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/adminNavbar.css">
+    <link rel="stylesheet" href="/NoticeBoard.css">
+    <link rel="stylesheet" href="/AdminDashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <%- include('../partials/adminDashboard.ejs') %>
+    </div>
+    <main>
+        <%- include('../partials/adminNavbar.ejs') %>
+
+        <div class="content">
+            <div class="chart">
+                <div class="maleCount" style="display:none"><%= maleStudents %></div>
+                <div class="femaleCount" style="display:none"><%= femaleStudents %></div>
+                <canvas id="mychart"></canvas>
+            </div>
+            <div class="allData">
+                <div class="adbox">
+                    <img src="/icons/classmates.png" alt="classmates.png">
+                    <div class="for">
+                        <span>Students</span>
+                        <p><%= studentCount %></p>
+                    </div>
+                </div>
+                <div class="adbox">
+                    <img src="/icons/teachers.png" alt="classmates.png">
+                    <div class="for">
+                        <span>Teachers</span>
+                        <p><%= teacherCount %></p>
+                    </div>
+                </div>
+                <div class="adbox">
+                    <img src="/icons/couple.png" alt="classmates.png">
+                    <div class="for">
+                        <span>Parents</span>
+                        <p><%= parents %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="notice-board">
+                <div class="n-nav">
+                    <p class="nb">Notice Board</p>
+                    <a href="/admin/NoticeBoard">Create New Notice</a>
+                </div>
+                <div class="notice">
+                    <% if(notices.length != 0) { %>
+                        <% notices.forEach((notice,index) => { %>
+                            <!--  d.getHours() + ":" + d.getMinutes() + ", " + d.toDateString(); -->
+                            <div class="n-content">
+                                <% if(index % 2 == 0){ %>
+                                    <p class="n-date" style="background-color: #f939a1;"><%= notice.updatedAt.toDateString() %></p>
+                                <% } else{ %>
+                                    <p class="n-date" style="background-color: #1884ff;"><%= notice.updatedAt.toDateString() %></p>
+                                <% } %>
+                                <h3 class="n-title"><%= notice.title %></h3>
+                                <p class="n-body"><%= notice.body %></p>
+                                <div class="del-notice">
+                                    <p class="n-author"><%= notice.author %></p>
+                                    <a href="/deleteNotice/<%= notice._id %>">Delete</a>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else{ %>
+                        <p class="no-notice">No notice to Display.</p>
+                    <% } %>
+                </div>
+            </div>
+
+        
+    </main>
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let ctx = document.getElementById('mychart');
+        let maleCount = document.querySelector('.maleCount').innerHTML;
+        let femaleCount = document.querySelector('.femaleCount').innerHTML;
+        const data = {
+            labels: [
+                `Male Students`,
+                `Female Students`,
+            ],
+            datasets: [{
+                label: 'Gender chart',
+                data: [maleCount,femaleCount],
+                backgroundColor: [
+                    'rgb(68, 155, 255)',
+                    'rgb(255, 162, 230)'
+                ],
+                hoverOffset: 4
+            }]
+        };
+        const myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: data
+        });
+    </script>
+</body>
+</html>

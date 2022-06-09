@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher | Notice Board</title>
+    <link rel="stylesheet" href="/TeacherDashboard.css">
+    <link rel="stylesheet" href="/adminNavbar.css">
+    <link rel="stylesheet" href="/NoticeBoard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <%- include('../partials/teacherDashboard.ejs') %>
+    </div>
+    <main>
+        <%- include('../partials/teacherNavbar.ejs') %>
+
+        <div class="notice-board">
+            <div class="n-nav">
+                <p class="nb">Notice Board</p>
+                <button class="create-new" style="background-color: #1884ff; font-size: 18px; color: #fff; border-radius: 40px; border:none; padding: 8px 15px; cursor: pointer;" onclick="createNew()">Create New Notice</button>
+            </div>
+            <div class="notice" style="min-height: 700px; max-height: 700px;">
+                <% if(notices.length != 0) { %>
+                    <% notices.forEach((notice,index) => { %>
+                        <!--  d.getHours() + ":" + d.getMinutes() + ", " + d.toDateString(); -->
+                        <div class="n-content">
+                            <% if(index % 2 == 0){ %>
+                                <p class="n-date" style="background-color: #f939a1;"><%= notice.updatedAt.toDateString() %></p>
+                            <% } else{ %>
+                                <p class="n-date" style="background-color: #1884ff;"><%= notice.updatedAt.toDateString() %></p>
+                            <% } %>
+                            <h3 class="n-title"><%= notice.title %></h3>
+                            <p class="n-body"><%= notice.body %></p>
+                            <div class="del-notice">
+                                <p class="n-author"><%= notice.author %></p>
+                                <% if(notice.author == teacherName){ %>
+                                    <a style="text-decoration:none;" href="/deleteNotice/<%= notice._id %>">Delete</a>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else{ %>
+                    <p class="no-notice">No notice to Display.</p>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="nb-content" style="display:none;">
+            <form action="/teacher/createNotice" method="post">
+                <p>Create a Notice</p>
+                <div class="nh-border"></div>
+                <div class="inf">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" placeholder="Enter Title" required>
+                </div>
+                <div class="inf">
+                    <label for="body">Notice</label>
+                    <textarea name="body" id="body" placeholder="Enter Notice" required></textarea>
+                </div>
+                <input class="sub-btn" type="submit" value="Create">
+            </form>
+        </div>
+        
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+
+        
+
+        function createNew(){
+            document.querySelector('.notice-board').style.display = 'none';
+            document.querySelector('.nb-content').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
