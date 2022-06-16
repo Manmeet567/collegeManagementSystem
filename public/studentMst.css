@@ -1,0 +1,48 @@
+.marks{
+    margin: 40px;
+    display: flex;
+}
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 400px;
+    height:500px;  
+    margin-right: 50px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px 7px rgb(0 0 0 / 10%);
+    padding: 30px;
+}
+.mst{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.circle{
+    width: 250px;
+    height:250px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+}
+.circle p{
+    font-size: 40px;
+    color: var(--blue);
+    
+}
+.bar{
+    height:10px;
+    width: 100%;
+    background-color:rgb(194, 194, 194);
+    border-radius: 40px;
+    margin-top: 30px;
+}
+.inner-bar-mst-1,
+.inner-bar-mst-2{
+    background-color: var(--blue);
+    border-radius: 40px;
+    height:10px;
+}

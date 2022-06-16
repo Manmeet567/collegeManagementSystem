@@ -1,0 +1,28 @@
+.attendence{
+    margin: 40px;
+}
+.attendence .card{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 400px;
+    height:500px;  
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px 7px rgb(0 0 0 / 10%);
+    padding: 30px;
+}
+.attendence .circle{
+    width: 300px;
+    height:300px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+}
+.attendence .circle p{
+    font-size: 40px;
+    color: var(--blue);
+    
+}
