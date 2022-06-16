@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="/StudentDashboard.css">
+    <link rel="stylesheet" href="/NoticeBoard.css">
+
+    <link rel="stylesheet" href="/adminNavbar.css">
+</head>
+<body>
+    <div class="dashboard">
+        <%- include('../partials/studentDashboard.ejs') %>
+    </div>
+    <main>
+        <%- include('../partials/studentNavbar.ejs') %>
+
+        <div class="s-content">
+            <div class="st-card">
+                <div class="header">
+                    <% if(gender == 'female'){ %>
+                        <img src="/icons/f-student.png" alt="Image not found">
+                    <% }else{ %>
+                        <img src="/icons/boy.png" alt="Image not found">
+                    <% } %>
+                    <p><%= studentName %></p>
+                </div>
+                <div class="ex-content">
+                    <div class="f-name">
+                        <div class="info"><span>Name:</span><span><%= studentName %></span></div>
+                        <div class="info"><span>Gender:</span><span><%= currentStudent.gender %></span></div>
+                        <div class="info"><span>Father Name:</span><span><%= currentStudent.father_name %></span></div>
+                        <div class="info"><span>Mother Name:</span><span><%= currentStudent.mother_name %></span></div>
+
+                        <div class="info"><span>Date of Birth:</span><span><%= currentStudent.dob %></span></div>
+
+                        <div class="info"><span>E-mail:</span><span><%= currentStudent.email %></span></div>
+    
+                        <div class="info"><span>Admission Date:</span><span><%= currentStudent.ad_date %></span></div>
+
+                        <div class="info"><span>Course:</span><span><%= currentStudent.course %></span></div>
+
+                        <div class="info"><span>Branch:</span><span><%= currentStudent.branch %></span></div>
+
+                        <div class="info"><span>Semester:</span><span><%= currentStudent.sem %></span></div>
+
+                        <div class="info"><span>Roll No:</span><span><%= currentStudent.roll_no %></span></div>
+
+                        <div class="info"><span>Address:</span><span><%= currentStudent.address %></span></div>
+
+                        <div class="info"><span>Mobile No.:</span><span><%= currentStudent.m_no %></span></div>
+
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="st-table">
+                <table style="margin-top: 20px;">
+                    <% if(currentStudent.sem == '6' && currentStudent.branch == 'CSE'){ %>
+                        <h1>Subject Information</h1>
+                        <thead>
+                            <tr>
+                                <th>Sr.no</th>
+                                <th>Name of Faculty</th>
+                                <th>Subject Name</th>
+                                <th>Subject Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>Dr. Pooja Dhand</td>
+                                <td>AI(Theory)</td>
+                                <td>BTCS 602-18</td>
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>Dr. Pooja Dhand</td>
+                                <td>Project</td>
+                                <td>BTCS 603-18</td>
+                            </tr>
+                            <tr>
+                                <td>3.</td>
+                                <td>Er. Varun Sharma</td>
+                                <td>AI Lab</td>
+                                <td>BTCS 605-18</td>
+                            </tr>
+                            <tr>
+                                <td>4.</td>
+                                <td>Er. Varun Sharma</td>
+                                <td>Project</td>
+                                <td>BTCS 603-18</td>
+                            </tr>
+                            <tr>
+                                <td>5.</td>
+                                <td>Er. Rajni Bedi</td>
+                                <td>Elective-III (Machine Learning Theory)</td>
+                                <td>BTCS 608-18</td>
+                            </tr>
+                            <tr>
+                                <td>6.</td>
+                                <td>Er. Rajni Bedi</td>
+                                <td>Elective-III (Machine Learning Lab)</td>
+                                <td>BTCS 619-18</td>
+                            </tr>
+                            <tr>
+                                <td>7.</td>
+                                <td>Er. Vikram Dhiman</td>
+                                <td>Elective - II (IOT Theor and Lab)</td>
+                                <td>BTCS 608-18</td>
+                            </tr>
+                            <tr>
+                                <td>8.</td>
+                                <td>Er. Vikram Dhiman</td>
+                                <td>Project</td>
+                                <td>BTCS 603-18</td>
+                            </tr>
+                            <tr>
+                                <td>9.</td>
+                                <td>Dr. Amarjeet Kaur</td>
+                                <td>Compiler Design</td>
+                                <td>BTCS 601-18</td>
+                            </tr>
+                            <tr>
+                                <td>10.</td>
+                                <td>Dr. Amarjeet Kaur</td>
+                                <td>Compiler Design Lab</td>
+                                <td>BTCS 604-18</td>
+                            </tr>
+                            <tr>
+                                <td>11.</td>
+                                <td>Dr. Parvinder Singh</td>
+                                <td>Open Elective (Wireless Communication)</td>
+                                <td>BTEC 601-18</td>
+                            </tr>
+                            <tr>
+                                <td>12.</td>
+                                <td>Er. Rakesh Gagneja</td>
+                                <td>Project</td>
+                                <td>BTEC 603-18</td>
+                            </tr>
+                        </tbody>
+                    <% }else{ %>
+                        <h1>Subject Information Unavailable</h1>
+                    <% } %>
+                </table>
+            </div>
+        </div>
+
+        
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

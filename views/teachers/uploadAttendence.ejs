@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher | Upload Attendence</title>
+    <link rel="stylesheet" href="/TeacherDashboard.css">
+    <link rel="stylesheet" href="/adminNavbar.css">
+    <link rel="stylesheet" href="/table.css">
+
+    <style>
+        h1{
+            margin: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <%- include('../partials/teacherDashboard.ejs') %>
+    </div>
+    <main>
+        <%- include('../partials/teacherNavbar.ejs') %>
+        <h1>Upload Attendence</h1>
+        <% if(teacherData.role!='incharge'){ %>
+            <p>Only incharges are allowed to fill attendence</p>   
+        <% }else{ %>
+            <% if(studentData.length != 0){ %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Roll No</th>
+                                <th>Attendence</th>
+                                <th>Enter Attendence below</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <% studentData.forEach(student=>{ %>
+                            <tr>
+                                <td><%= student.first_name %> <%= student.last_name %></td>
+                                <td><%= student.roll_no %></td>
+                                <td><%= student.attendence %>%</td>
+                                <form action="/teacher/uploadingAttendence/<%= student.branch %>/<%= student.sem %>/<%= student._id %>" method="post">
+                                <td>Enter Attendence - <input type="text" pattern="[0-9]+([,\.][0-9]+)?" name="attendence" value="<%= student.attendence %>" required></td>
+                                <td><input type="submit" value="Save"></td>
+                                </form>
+                            </tr>
+                        <% }) %>
+                    </table>
+                
+            <% }else{ %>
+                <p>Everyone's Attendence Uploaded</p>
+            <% } %>
+        <% } %>    
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

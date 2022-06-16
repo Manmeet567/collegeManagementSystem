@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student | Check Assignments</title>
+    <link rel="stylesheet" href="/StudentDashboard.css">
+    <link rel="stylesheet" href="/adminNavbar.css">
+    <link rel="stylesheet" href="/studentMst.css">
+</head>
+<body>
+    <div class="dashboard">
+        <%- include('../partials/studentDashboard.ejs') %>
+    </div>
+    <main>
+        <%- include('../partials/studentNavbar.ejs') %>
+        <h1></h1>
+        <div class="marks">
+            <div class="card">
+                <h1>Overall MST 1 %age</h1>
+                <div class="mst">
+                    <div class="circle">
+                        <% if(student.mst1 == 'null'){ %>
+                            <p class="st-marks-1">0%</p>
+                        <% }else { %>
+                            <p class="st-marks-1"><%= student.mst1 %>%</p>
+                        <% } %>
+                    </div>
+                    <div class="bar"><div class="inner-bar-mst-1"></div></div>
+                </div>
+            </div>
+            <div class="card">
+                <h1>Overall MST 2 %age</h1>
+                <div class="mst">
+                    <div class="circle">
+                        <% if(student.mst2 == 'null'){ %>
+                            <p class="st-marks-2">0%</p>
+                        <% }else { %>
+                            <p class="st-marks-2"><%= student.mst2 %>%</p>
+                        <% } %>
+                    </div>
+                    <div class="bar"><div class="inner-bar-mst-2"></div></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        const mst1 = document.querySelector('.st-marks-1').innerHTML;
+        const mst2 = document.querySelector('.st-marks-2').innerHTML;
+
+        document.querySelector('.inner-bar-mst-1').style.width = mst1;
+        document.querySelector('.inner-bar-mst-2').style.width = mst2;
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher | Upload MST Marks</title>
+    <link rel="stylesheet" href="/TeacherDashboard.css">
+    <link rel="stylesheet" href="/adminNavbar.css">
+    <link rel="stylesheet" href="/table.css">
+
+    <style>
+        h1{
+            margin: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <%- include('../partials/teacherDashboard.ejs') %>
+    </div>
+    <main>
+        <%- include('../partials/teacherNavbar.ejs') %>
+
+        <% if(mst == 'mst1'){ %>
+            <h1>Upload Marks for MST-1</h1>
+        <% }else{ %>
+            <h1>Upload Marks for MST-2</h1>
+        <% } %>
+        
+        <% if(studentData != null){ %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Roll No</th>
+                            <th>MST-1</th>
+                            <th>MST-2</th>
+                            <th>Enter marks Below</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <% studentData.forEach(student =>{ %>
+                        <tr>
+                            <td><%= student.first_name %> <%= student.last_name %></td>
+                            <td><%= student.roll_no %></td>
+                            <td><%= student.mst1 %></td>
+                            <td><%= student.mst2 %></td>
+                            <form action="/update/<%= mst %>/<%= student.branch %>/<%= student.sem %>/<%= student._id %>" method="Post">
+                                <% if(mst == 'mst1'){ %>
+                                    <td>Enter MST-1 marks - <input type="text" pattern="[0-9]+([,\.][0-9]+)?" name="mst1" placeholder="if absent Enter null" 
+                                        <% if(student.mst1 != 'null'){ %>
+                                            value="<%= student.mst1 %>"
+                                        <% } %>
+                                     required></td>
+                                <% } else { %>
+                                    <td>Enter MST-2 marks - <input type="text" name="mst1" placeholder="if absent Enter null" pattern="[0-9]+([,\.][0-9]+)?" <% if(student.mst2 != 'null'){ %>
+                                        value="<%= student.mst2 %>"
+                                    <% } %> required></td>
+                                <% } %>
+                                <td><input type="submit" value="Save"></td>
+                            </form>
+                        </tr>
+                    <% }) %>
+                </table>
+        <% } else{ %>
+            <p style="margin:40px;">No data to Display</p>
+        <% } %>
+        
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
